@@ -35,6 +35,8 @@
 <script src="plugins/datatables/jquery.dataTables.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>   
 
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+
 <script>
   $(function () {  
 
@@ -57,10 +59,13 @@
     if($("#tbl-list-return-book").length > 0) { 
       $("#tbl-list-return-book").DataTable();
     } 
-
     
     if($("#tbl-list-day-settings").length > 0) { 
       $("#tbl-list-day-settings").DataTable();
+    } 
+
+    if($("#frm-add-category").length > 0) { 
+      $("#frm-add-category").validate();
     }
 
   });

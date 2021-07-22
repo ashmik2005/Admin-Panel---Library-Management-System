@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Add Category</h1>
+            <h1 class="m-0 text-dark">Edit Category</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Category</li>
+              <li class="breadcrumb-item active">Edit Category</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,7 +31,7 @@
                 <!-- general form elements disabled -->
                 <div class="card card-dark">
                   <div class="card-header">
-                    <h3 class="card-title">Add Category</h3>
+                    <h3 class="card-title">Edit Category</h3>
                   </div>  
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -41,15 +41,15 @@
                           <!-- text input -->
                           <div class="form-group">
                             <label>Name</label>
-                            <input required type="text" class="form-control" placeholder="Enter name" name="name">
+                            <input required value="<%= category.name %>" type="text" class="form-control" placeholder="Enter name" name="name">
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label>Select Status</label> 
                             <select class="form-control" name="status">   
-                                <option value="1">Active</option> 
-                                <option value="0">Inactive</option>
+                                <option <% if(category.status == '1') { %> selected <%} %> value="1">Active</option> 
+                                <option <% if(category.status == '0') { %> selected <% } %> value="0">Inactive</option>
                             </select>
                           </div>
                         </div>

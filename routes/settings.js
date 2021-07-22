@@ -8,7 +8,7 @@ router.get('/admin/currency-settings', (req, res) => {
 
 router.get('/admin/days-settings', (req, res) => { 
     res.render('admin/day-settings')
-}) 
+})  
 
 module.exports = router 
 
