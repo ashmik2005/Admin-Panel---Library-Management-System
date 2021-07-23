@@ -40,7 +40,38 @@
                           <th>Action</th>
                         </tr>
                         </thead>
-                       <tbody></tbody>
+                       <tbody> 
+                         <% users.forEach((user) => { %> 
+                          <tr> 
+                            <td><%= user.name %></td> 
+                            <td><%= user.email %></td> 
+                            <td><%= user.mobile %></td> 
+                            <td> 
+                              <%  
+                              if( user.status == '1' ) { 
+                                %> 
+                                <button class="btn btn-success">Active</button> 
+                                <%
+                              } else { 
+                                %>  
+                                <button class="btn btn-danger">Inactive</button>
+                                <%
+                              }  
+                            %> 
+                          </td> 
+                          <td> 
+                            <a href="/admin/edit-user/<%= user.id %>" class="btn btn-info"><i class="fa fa-edit"></i></a> 
+                            
+                            <form id="frm-delete-user-<%= user.id %>" method="post"
+                              action="/admin/delete-user">
+                              <input type="hidden" value="<%= user.id %>" name="user_id"/>
+                            </form>
+                            
+                            <a href="javascript:void(0)" onclick="if(confirm('Are you sure want to delete ?')){ $('#frm-delete-user-<%= user.id %>').submit() }" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                          </td>
+                          </tr>
+                         <% }) %>
+                       </tbody>
                         <tfoot>
                             <tr>
                                 <th>Name</th>
