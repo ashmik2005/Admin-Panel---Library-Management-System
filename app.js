@@ -2,7 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan'); 
+var logger = require('morgan');  
+var fileupload = require('express-fileupload')
 
 var flash = require('express-flash') 
 var session = require('express-session')
@@ -28,8 +29,13 @@ app.use(session({
   secret: "my_secret", 
   resave: true, 
   saveUninitialized: true
-}));
-app.use(flash());
+})); 
+
+app.use(flash()); 
+
+app.use(fileupload({ 
+  createParentPath: true
+}))
 
 app.use(logger('dev'));
 app.use(express.json());
