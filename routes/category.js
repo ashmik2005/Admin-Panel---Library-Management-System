@@ -51,7 +51,7 @@ router.get('/admin/list-category', async (req, res, next) => {
     });
 }) 
 
-router.get('/admin/edit-category/:categoryId', (req, res, next) => {  
+router.route('/admin/edit-category/:categoryId').get((req, res, next) => {  
 
     categoryModel.findOne({ 
         where:{ 
@@ -65,6 +65,84 @@ router.get('/admin/edit-category/:categoryId', (req, res, next) => {
         })
     })
  
+}).post((req, res, next) => { 
+    categoryModel.findOne({ 
+        where:{ 
+            [Op.and] : [ 
+                { 
+                    id: { 
+                        [Op.ne] : req.params.categoryId
+                    } 
+                }, 
+                { 
+                    name: { 
+                        [Op.eq] : req.body.name 
+                    }
+                }
+            ]
+        }
+    }).then((data) => { 
+        if (data) { 
+            // Category already exists 
+            req.flash("error", "Category Already Exists") 
+            res.redirect('/admin/edit-category/' + req.params.categoryId)
+        } else { 
+            // Category does not exist 
+            categoryModel.update({ 
+                name: req.body.name, 
+                status: req.body.status
+            }, { 
+                where: { 
+                    id: req.params.categoryId
+                }
+            }).then((data) => { 
+
+                if(data) { 
+                    req.flash("success", "Category has been updated")
+                } else { 
+                    req.flash("error", "Could not update category")
+                } 
+                
+                res.redirect('/admin/edit-category/' + req.params.categoryId)
+            })
+        }
+    })
+}) 
+
+router.post("/admin/delete-category", (req, res, next) => { 
+
+    categoryModel.findOne({ 
+        where: { 
+            id: { 
+                [Op.eq] : req.body.category_id
+            }
+        }
+    }).then((data) => { 
+        if (data) { 
+            // Data found! Now we delete it 
+            categoryModel.destroy({ 
+                where: { 
+                    id: { 
+                        [Op.eq] : req.body.category_id
+                    }
+                }
+            }).then((status) => { 
+                if (status) { 
+                    // Data deleted successfully  
+                    req.flash("success", "Category deleted Successfully")
+
+                } else { 
+                    // Data could not be deleted 
+                    req.flash("error", "Failed to delete category")
+                } 
+
+                res.redirect("/admin/list-category")
+            })
+        } else { 
+
+        }
+    })
+
 })
 
 module.exports = router 

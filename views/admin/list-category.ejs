@@ -52,8 +52,13 @@
                               <% } %>
                             </td> 
                             <td> 
-                              <a href="/admin/edit-category/<%= data.id %>" class="btn btn-primary"><i class="fa fa-edit"></i></a> 
-                              <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                              <a href="/admin/edit-category/<%= data.id %>" class="btn btn-primary"><i class="fa fa-edit"></i></a>  
+
+                              <form method="post" action="/admin/delete-category" id="frm-delete-category-<%= data.id %>"> 
+                                <input type="hidden" value="<%= data.id %>" name="category_id" /> 
+                              </form>
+
+                              <a href="javascript:void(0)" onclick="if(confirm('Are you sure you want to delete this Category?')){ $('#frm-delete-category-<%= data.id %>').submit() }" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
                           </tr>
                          <% }) %>
