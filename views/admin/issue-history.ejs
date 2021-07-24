@@ -38,10 +38,30 @@
                           <th>UserInfo</th>
                           <th>Total Days</th>  
                           <th>Issue Date</th>
-                          <th>Status</th>
                         </tr>
                         </thead>
-                       <tbody></tbody>
+                       <tbody> 
+                         <% list.forEach((data) => { %> 
+                          <tr> 
+                            <td> 
+                              <%= data.Category.name %>
+                            </td> 
+                            <td> 
+                              <%= data.Book.name %>
+                            </td> 
+                            <td> 
+                              Name: <%= data.User.name %> <br> 
+                              Email: <%= data.User.email %>
+                            </td> 
+                            <td> 
+                              <%= data.days_issued %>
+                            </td>  
+                            <td> 
+                              <%= data.issued_date %>
+                            </td>  
+                          </tr>
+                         <% }) %>
+                       </tbody>
                         <tfoot>
                             <tr>
                                 <th>Category</th>
@@ -49,7 +69,7 @@
                                 <th>UserInfo</th>
                                 <th>Total Days</th>  
                                 <th>Issue Date</th>
-                                <th>Status</th>
+                                
                               </tr>
                         </tfoot>
                       </table>

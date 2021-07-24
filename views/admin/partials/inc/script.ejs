@@ -74,7 +74,44 @@
 
     if($("#frm-add-user").length > 0) { 
       $("#frm-add-user").validate();
+    }  
+
+    if($('#frm-issue-book').length > 0) { 
+      $('#frm-issue-book').validate()
     }
+
+    // Add AJAX Requests 
+
+      // add ajax requests
+
+      var app_url = "http://localhost:3000";
+
+$("#dd_category").on("change", function () {
+  var category_id = $(this).val();
+
+  var postdata = "cat_id=" + category_id;
+
+  $.post(app_url + "/admin/category-list-book", postdata, function (
+    response
+  ) {
+    var booksHtml = "<option value=''>Choose Book</option>";
+
+    $.each(response.books, function (index, item) {
+      booksHtml +=
+        '<option value="' + item.id + '">' + item.name + "</option>";
+    });
+
+    $("#dd_book_list").html(booksHtml);
+  });
+});
+
+    
+
+    
+
+
+
+  
 
   });
 </script>

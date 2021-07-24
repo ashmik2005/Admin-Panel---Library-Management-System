@@ -1,5 +1,10 @@
 <%- include('partials/header') %>
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) --> 
+    <style> 
+       #frm-issue-book label.error{ 
+         color: red;
+       }
+    </style>
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -30,20 +35,23 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <form role="form">
+                    <form method="post" action="/admin/issue-book/" id="frm-issue-book">
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label>Select Category</label> 
-                            <select class="form-control" required name="dd_category">   
-                                <option value="">Choose Category</option> 
+                            <select class="form-control" required name="dd_category" id="dd_category">   
+                                <option value="">Choose Category</option>  
+                                <% categories.forEach((category) => { %> 
+                                  <option value="<%= category.id %>"><%= category.name %></option>
+                                <% }) %> 
                             </select>
                           </div>
                         </div> 
                         <div class="col-sm-6">
                             <div class="form-group">
                               <label>Select Book</label> 
-                              <select class="form-control" required name="dd_book">   
+                              <select class="form-control" required name="dd_book" id="dd_book_list">   
                                   <option value="">Choose Book</option> 
                               </select>
                             </div>
@@ -55,7 +63,10 @@
                           <div class="form-group">
                             <label>Select User</label> 
                             <select class="form-control" required name="dd_user">   
-                                <option value="">Choose User</option> 
+                                <option value="">Choose User</option>  
+                                <% users.forEach((user) => { %> 
+                                  <option value="<%= user.id %>"><%= user.name %> (<%= user.email %>)</option>
+                                <% }) %> 
                             </select>
                           </div>
                         </div> 
@@ -63,21 +74,15 @@
                             <div class="form-group">
                               <label>Number of days to issue?</label> 
                               <select class="form-control" required name="dd_days">   
-                                  <option value="">Choose days</option> 
+                                  <option value="">Choose days</option>  
+                                  <option value="7">7 Days</option> 
+                                  <option value="30">30 Days</option>
                               </select>
                             </div>
                           </div>
                       </div>   
                         
-                      <div class="row">  
-                        <div class="form-group">
-                            <label>Select Status</label> 
-                            <select class="form-control" name="status">   
-                                <option value="1">Active</option> 
-                                <option value="0">Inactive</option>
-                            </select>
-                          </div>
-                      </div>
+                     
                       <button class="btn btn-dark" type="submit">Submit</button>
                     </form>
                   </div>
