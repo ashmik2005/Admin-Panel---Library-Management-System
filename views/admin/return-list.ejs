@@ -36,18 +36,40 @@
                           <th>Category</th>
                           <th>Book</th>
                           <th>UserInfo</th>
-                          <th>Returned Date</th> 
-                          <th>Status</th>
+                          <th>Total Days</th>  
+                          <th>Return Date</th>
                         </tr>
                         </thead>
-                       <tbody></tbody>
+                       <tbody> 
+                         <% list.forEach((data) => { %> 
+                          <tr> 
+                            <td> 
+                              <%= data.Category.name %>
+                            </td> 
+                            <td> 
+                              <%= data.Book.name %>
+                            </td> 
+                            <td> 
+                              Name: <%= data.User.name %> <br> 
+                              Email: <%= data.User.email %>
+                            </td> 
+                            <td> 
+                              <%= data.days_issued %>
+                            </td>  
+                            <td> 
+                              <%= data.returned_date %>
+                            </td>  
+                          </tr>
+                         <% }) %>
+                       </tbody>
                         <tfoot>
                             <tr>
                                 <th>Category</th>
                                 <th>Book</th>
                                 <th>UserInfo</th>
-                                <th>Returned Date</th> 
-                                <th>Status</th>
+                                <th>Total Days</th>  
+                                <th>Return Date</th>
+                                
                               </tr>
                         </tfoot>
                       </table>

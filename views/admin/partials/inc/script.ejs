@@ -78,11 +78,16 @@
 
     if($('#frm-issue-book').length > 0) { 
       $('#frm-issue-book').validate()
-    }
+    }  
+
+    if($('#frm-return-book').length > 0) { 
+      $('#frm-return-book').validate()
+    } 
+
 
     // Add AJAX Requests 
 
-      // add ajax requests
+      
 
       var app_url = "http://localhost:3000";
 
@@ -103,7 +108,26 @@ $("#dd_category").on("change", function () {
 
     $("#dd_book_list").html(booksHtml);
   });
-});
+}); 
+
+$("#return-dd-user").on("change", function () {
+      var user_id = $(this).val();
+
+      var postdata = "user_id=" + user_id;
+
+      $.post(app_url + "/admin/user-list-book", postdata, function (
+        response
+      ) {
+        var booksHtml = "<option value=''>Choose Book</option>";
+
+        $.each(response.books, function (index, item) {
+          booksHtml +=
+            '<option value="' + item.bookId + '">' + item.Book.name + "</option>";
+        });
+
+        $("#return_dd_book").html(booksHtml);
+      });
+    }); 
 
     
 

@@ -1,5 +1,12 @@
 <%- include('partials/header') %>
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) --> 
+
+    <style> 
+      #frm-return-book label.error{ 
+        color: red; 
+      }
+    </style>
+
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -30,20 +37,23 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <form role="form">
+                    <form method="post" action="/admin/return-a-book" id="frm-return-book">
                       <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                               <label>Select User</label> 
-                              <select class="form-control" required name="dd_user">   
-                                  <option value="">Choose User</option> 
+                              <select class="form-control" required name="dd_user" id="return-dd-user">   
+                                  <option value="">Choose User</option>  
+                                  <% users.forEach((data) => { %> 
+                                    <option value="<%= data.id %>"> <%= data.name %> (<%= data.email %>) </option>
+                                  <% }) %>
                               </select>
                             </div>
                           </div> 
                         <div class="col-sm-6">
                             <div class="form-group">
                               <label>Select Book</label> 
-                              <select class="form-control" required name="dd_book">   
+                              <select class="form-control" required name="dd_book" id="return_dd_book">   
                                   <option value="">Choose Book</option> 
                               </select>
                             </div>
@@ -62,5 +72,5 @@
     <!-- /.content -->
  
   <!-- /.content-wrapper --> 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> 
   
