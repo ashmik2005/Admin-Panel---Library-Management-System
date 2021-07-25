@@ -6,12 +6,20 @@ var Op = Sequelize.Op
 // Import Models 
 const categoryModel = require('../models').Category 
 const userModel = require('../models').User 
-const bookModel = require('../models').Book  
+const bookModel = require('../models').Book    
+const dayModel = require('../models').DaySetting
 const issueBookModel = require('../models').IssueBook
 
 const router = express.Router() 
 
-router.route('/admin/issue-book').get(async (req, res, next) => {  
+router.route('/admin/issue-book').get(async (req, res, next) => {   
+
+    var days = await dayModel.findAll({
+        where:{
+            status: '1'
+        }
+    });
+
     var categories = await categoryModel.findAll({ 
         where:{ 
             status:{ 
@@ -30,7 +38,8 @@ router.route('/admin/issue-book').get(async (req, res, next) => {
 
     res.render('admin/issue-a-book', { 
         categories:categories, 
-        users:users
+        users:users, 
+        days : days
     })
 }).post(async (req, res, next) => {   
 

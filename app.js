@@ -16,7 +16,8 @@ var bookRouter = require('./routes/book');
 var userRouter = require('./routes/user'); 
 var issueBookRouter = require('./routes/issuebook'); 
 var returnBookRouter = require('./routes/returnbook'); 
-var settingsRouter = require('./routes/settings')
+var settingsRouter = require('./routes/settings') 
+var loginRouter = require('./routes/login')
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static(path.join(__dirname, 'public'))) 
 app.use('/admin/:any', express.static(path.join(__dirname,'public')))
 
+app.use('/', loginRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter); 
 app.use('/', adminRouter); 

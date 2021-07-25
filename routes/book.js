@@ -3,7 +3,8 @@ const Sequelize = require('sequelize')
 
 // Load Category Model 
 var categoryModel = require('../models').Category;  
-var bookModel = require('../models').Book
+var bookModel = require('../models').Book 
+var optionModel = require('../models').Option 
 
 const Op = Sequelize.Op
 
@@ -17,10 +18,19 @@ router.route('/admin/add-book').get(async (req, res, next) => {
                 [Op.eq] : '1'
             }
         }
+    }) 
+
+    var currency_data = await optionModel.findOne({ 
+        where:{ 
+            option_name:{ 
+                [Op.eq] : "active_currency" 
+            }
+        }
     })
 
     res.render('admin/add-book', { 
-        categories : categories
+        categories : categories, 
+        currency_data : currency_data
     })
 }).post((req, res, next) => { 
 
@@ -76,10 +86,20 @@ router.get('/admin/list-book', async (req, res, next) => {
             model: categoryModel, 
             attributes: ["name"]
         }
+    }) 
+
+    var currency_data = await optionModel.findOne({ 
+        where:{ 
+            option_name:{ 
+                [Op.eq] : "active_currency" 
+            }
+        }
     })
 
+
     res.render('admin/list-book', { 
-        books: books
+        books: books, 
+        currency_data : currency_data
     })
 }) 
 
@@ -91,7 +111,15 @@ router.route('/admin/edit-book/:bookId').get(async (req, res, next) => {
                 [Op.eq] : req.params.bookId
             }
         }
-    })  
+    })   
+
+    var currency_data = await optionModel.findOne({ 
+        where:{ 
+            option_name:{ 
+                [Op.eq] : "active_currency" 
+            }
+        }
+    })
 
     var categories = await categoryModel.findAll({ 
         where:{ 
@@ -103,7 +131,8 @@ router.route('/admin/edit-book/:bookId').get(async (req, res, next) => {
 
     res.render('admin/edit-book', { 
         book: book_data, 
-        categories: categories
+        categories: categories, 
+        currency_data:currency_data
     })
 }).post((req, res, next) => { 
     if (!req.files) { 

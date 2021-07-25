@@ -29,8 +29,20 @@
                     <h3 class="card-title">Currency Settings</h3>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
-                    <form role="form">
+                  <div class="card-body"> 
+
+                    <div class="alert alert-success"> 
+                      Active Currency: 
+                      <% if (currency_data !== null) { %> 
+
+                        <%= currency_data.option_value %>
+
+                      <% } else { %> 
+                        <%= "--" %>
+                      <% } %>
+                    </div>
+
+                    <form method="post" action="/admin/currency-settings" id="frm-currency-settings">
                       <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">

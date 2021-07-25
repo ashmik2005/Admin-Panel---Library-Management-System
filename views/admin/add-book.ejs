@@ -68,7 +68,13 @@
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>Amount</label> 
+                            <label>Amount 
+                              <% if (currency_data !== null){ %> 
+                                (<%= currency_data.option_value %>)
+                              <% } else { %> 
+                      
+                              <% } %>
+                            </label> 
                             <input required type="number" min="1" class="form-control" placeholder="Enter amount" name="amount">
                           </div>
                         </div>

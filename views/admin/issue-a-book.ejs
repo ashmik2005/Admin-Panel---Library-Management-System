@@ -75,8 +75,9 @@
                               <label>Number of days to issue?</label> 
                               <select class="form-control" required name="dd_days">   
                                   <option value="">Choose days</option>  
-                                  <option value="7">7 Days</option> 
-                                  <option value="30">30 Days</option>
+                                  <% days.forEach(function(data){ %>
+                                    <option value="<%= data.total_days %>"><%= data.total_days %> days</option>
+                                <% }) %> 
                               </select>
                             </div>
                           </div>

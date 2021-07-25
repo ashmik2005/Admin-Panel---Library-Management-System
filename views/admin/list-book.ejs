@@ -44,7 +44,11 @@
                           <th>Cover Image</th>
                           <th>Category</th>
                           <th>Name</th> 
-                          <th>Amount</th> 
+                          <th>Amount <% if (currency_data !== null){ %> 
+                            (<%= currency_data.option_value %>)
+                          <% } else { %> 
+                  
+                          <% } %></th> 
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -80,7 +84,7 @@
                               
                               <a href="javascript:void(0)" onclick="if(confirm('Are you sure you want to delete?')){  $('#frm-delete-book-<%= data.id %>').submit() }" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
-                          </tr>
+                          </tr> 
                          <% }) %>
                        </tbody>
                         <tfoot>

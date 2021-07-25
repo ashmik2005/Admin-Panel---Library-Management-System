@@ -8,7 +8,9 @@ var Op = Sequelize.Op;
 const router = express.Router() 
 
 router.route('/admin/add-category').get((req, res, next) => { 
-    res.render('admin/add-category')
+    res.render('admin/add-category', { 
+        title: "Add Category | LMS"
+    })
 }).post((req, res, next) => {  
 
     categoryModel.findOne({ 
